@@ -33,16 +33,16 @@ def get_price(message: telebot.types.Message):
         values = message.text.split(' ')
 
         if len(values) != 3:
-            raise ConvertionException('Введите команду или 3 параметра')
+            raise ConvertionException('Слишком много параметров')
 
         quote, base, amount = values
         total_base = Exchange.get_price(quote, base, amount)
     except ConvertionException as e:
-        bot.reply_to(message, f'Ошибка пользователя.\n{e}')
+        bot.reply_to(message, f'Не удалось обработать команду.\n{e}')
     except Exception as e:
-        bot.reply_to(message, f'Что-то пошло не так с {e}')
+        bot.reply_to(message, f'Что-то пошло не так с \n{e}')
     else:
-        text = f'Переводим {quote} в {base}\n{amount} {quote} = {total_base} {base}'
+        text = f'Переводим {amount}  {quote} в {base} - {total_base}'
         bot.send_message(message.chat.id, text)
 
 
