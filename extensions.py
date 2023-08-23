@@ -19,12 +19,12 @@ class Exchange:
         try:
             quote_ticker = keys[quote]
         except KeyError:
-            raise ConvertionException(f'Не смог обработать валюту {quote}')
+            raise ConvertionException(f'Не удалось обработать валюту {quote}')
 
         try:
             base_ticker = keys[base]
         except KeyError:
-            raise ConvertionException(f'Не смог обработать валюту {base}')
+            raise ConvertionException(f'Не удалось обработать валюту {base}')
 
         try:
             amount = int(amount)
@@ -33,5 +33,5 @@ class Exchange:
 
         r = requests.get(
             f'https://min-api.cryptocompare.com/data/price?fsym={base_ticker}&tsyms={quote_ticker}')
-        total_base = json.loads(r.content)[keys[quote]])
+        total_base = json.loads(r.content)[keys[base]]
         return total_base
