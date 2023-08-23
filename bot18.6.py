@@ -1,8 +1,8 @@
 import telebot
 from config import keys, TOKEN
-from extensions import ConvertionException, Exchange
+from utils import ConvertionException, Exchange
 
-bot = telebot.TeleBot('6064515207:AAFZSocU8756qRbM6Fz11-NyJTsg0EM5fIc')
+bot = telebot.TeleBot('TOKEN')
 
 
 @bot.message_handler(commands=['start'])
@@ -27,7 +27,7 @@ def values(message: telebot.types.Message):
     bot.reply_to(message, text)
 
 
-@bot.message_handler(content_types=['text'])
+@bot.message_handler(content_types=['text', ])
 def get_price(message: telebot.types.Message):
     try:
         values = message.text.split(' ')
